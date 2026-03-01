@@ -6,12 +6,17 @@ import { isValidEmail } from "@/lib/utils";
 export default function WaitlistSection() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && isValidEmail(email)) {
-      setSubmitted(true);
+    setError("");
+    if (!email || !isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
     }
+    // TODO: wire to backend (e.g. POST /api/waitlist)
+    setSubmitted(true);
   };
 
   return (
@@ -39,10 +44,11 @@ export default function WaitlistSection() {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => { setEmail(e.target.value); setError(""); }}
               placeholder="you@yourcompany.com"
               required
-              className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:bg-white/15 transition-all"
+              aria-invalid={!!error}
+              className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:bg-white/15 transition-all aria-[invalid=true]:border-red-500"
             />
             <button
               type="submit"
@@ -50,6 +56,9 @@ export default function WaitlistSection() {
             >
               Join Waitlist
             </button>
+            {error && (
+              <p className="w-full text-sm text-red-400 text-left">{error}</p>
+            )}
           </form>
         ) : (
           <div className="flex items-center justify-center gap-3 py-3">

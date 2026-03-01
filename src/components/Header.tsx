@@ -1,21 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const ticking = useRef(false);
 
   useEffect(() => {
-    let ticking = false;
     const handleScroll = () => {
-      if (!ticking) {
+      if (!ticking.current) {
         window.requestAnimationFrame(() => {
           setScrolled(window.scrollY > 20);
-          ticking = false;
+          ticking.current = false;
         });
-        ticking = true;
+        ticking.current = true;
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
