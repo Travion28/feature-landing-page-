@@ -63,7 +63,7 @@ export default function HowItWorksSection() {
             <div key={step.number} className="relative">
               {/* Connector line */}
               {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-purple-500/40 to-transparent z-10 -translate-y-1/2" style={{ width: "calc(100% - 2rem)", left: "calc(100% - 1rem)" }} />
+                <div className="step-connector hidden lg:block absolute top-8 h-px bg-gradient-to-r from-purple-500/40 to-transparent z-10 -translate-y-1/2" />
               )}
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-purple-500/30 transition-all duration-300">
                 <div className="flex items-center gap-3 mb-4">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { isValidEmail } from "@/lib/utils";
 
 export default function WaitlistSection() {
   const [email, setEmail] = useState("");
@@ -8,8 +9,7 @@ export default function WaitlistSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email && emailRegex.test(email)) {
+    if (email && isValidEmail(email)) {
       setSubmitted(true);
     }
   };
