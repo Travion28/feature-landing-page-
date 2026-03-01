@@ -11,7 +11,7 @@ export default function WaitlistSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    if (!email || !isValidEmail(email)) {
+    if (!isValidEmail(email)) {
       setError("Please enter a valid email address.");
       return;
     }
